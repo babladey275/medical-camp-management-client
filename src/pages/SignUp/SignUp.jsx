@@ -1,5 +1,10 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const {
@@ -8,9 +13,45 @@ const SignUp = () => {
     reset,
     formState: { errors },
   } = useForm();
+  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     console.log(data);
+
+    createUser(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        updateUserProfile(data.name, data.photoURL)
+          .then(() => {
+            // create user entry in the database
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+            };
+            axiosPublic.post("/users", userInfo).then((res) => {
+              if (res.data.insertedId) {
+                reset();
+                Swal.fire({
+                  icon: "success",
+                  title: "Registration Successful!",
+                  text: "You have successfully registered!",
+                  confirmButtonText: "OK",
+                }).then(() => {
+                  navigate("/");
+                });
+              }
+            });
+          })
+          .catch((error) => {
+            toast.error(`Profile update failed: ${error.message}`);
+          });
+      })
+      .catch((error) => {
+        toast.error(`Registration failed: ${error.message}`);
+      });
   };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
