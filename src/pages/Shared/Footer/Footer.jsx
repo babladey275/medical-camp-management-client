@@ -73,7 +73,7 @@ const Footer = () => {
         {/* Footer Bottom */}
         <div className="text-center mt-8">
           <p className="text-sm">
-            &copy; 2025 Medical Camp. All Rights Reserved.
+            &copy; {new Date().getFullYear()} Medical Camp. All Rights Reserved.
           </p>
         </div>
       </div>
