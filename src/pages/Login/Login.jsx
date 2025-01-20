@@ -1,16 +1,50 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm();
+  const { signIn } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   const onSubmit = (data) => {
     console.log(data);
+
+    signIn(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        Swal.fire({
+          title: "User login successful!",
+          showClass: {
+            popup: `
+          animate__animated
+          animate__fadeInUp
+          animate__faster
+        `,
+          },
+          hideClass: {
+            popup: `
+          animate__animated
+          animate__fadeOutDown
+          animate__faster
+        `,
+          },
+        });
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        toast.error(`Login failed: ${error.message}`);
+      });
   };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
