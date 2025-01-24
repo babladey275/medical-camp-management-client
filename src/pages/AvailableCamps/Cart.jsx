@@ -24,17 +24,14 @@ const Cart = ({ camp }) => {
           <span>{camp.participantCount} Participants</span>
         </p>
 
-        <div className="mt-4 flex justify-between items-center">
-          <p>
-            <span className="text-lg font-semibold mr-1">Fees:</span>
-            <span className="text-lg font-semibold">
-              {camp.fees === 0 ? "Free" : `$${camp.fees}`}
-            </span>
-          </p>
-          <p className="text-sm text-gray-500">
+        <p>
+          <span className="font-semibold mr-1">Date & Time: </span>
+          <span className="text-sm text-gray-500">
             {new Date(camp.dateTime).toLocaleString()}
-          </p>
-        </div>
+          </span>
+        </p>
+
+        <p className="text-gray-700">{camp.description}</p>
 
         <div className="mt-4 flex justify-center">
           <button className="btn hover:bg-[#3986d7] bg-[#399ced] w-full text-white">
