@@ -2,10 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Cart from "./Cart";
 import { useState } from "react";
+import { FaTh, FaThList } from "react-icons/fa";
 
 const AvailableCamps = () => {
   const axiosPublic = useAxiosPublic();
-  const [sortBy, setSortBy] = useState("participantCount");
+  const [sortBy, setSortBy] = useState("");
+  const [layout, setLayout] = useState("three-columns");
 
   const { data: camps = [], isLoading } = useQuery({
     queryKey: ["camps", sortBy],
@@ -19,12 +21,24 @@ const AvailableCamps = () => {
     setSortBy(value);
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  const toggleLayout = () => {
+    setLayout((prevLayout) =>
+      prevLayout === "three-columns" ? "two-columns" : "three-columns"
+    );
+  };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <span className="loading loading-ring loading-lg"></span>
+      </div>
+    );
+  }
   return (
     <div className="py-8">
       <div>
-        {/* Sorting Dropdown */}
-        <div className="mb-4 flex">
+        <div className="mb-4 flex items-center">
+          {/* Sorting Dropdown */}
           <div className="dropdown dropdown-hover">
             <div
               tabIndex={0}
@@ -54,9 +68,28 @@ const AvailableCamps = () => {
               </li>
             </ul>
           </div>
+
+          {/* layout button */}
+          <div className="hidden md:block">
+            <button
+              onClick={toggleLayout}
+              className="btn bg-[#399ced] hover:bg-[#3986d7] text-white"
+            >
+              {layout === "three-columns" ? (
+                <FaTh className="text-xl" />
+              ) : (
+                <FaThList className="text-xl" />
+              )}
+            </button>
+          </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <div
+        className={`grid grid-cols-1 m-2 md:m-0 ${
+          layout === "three-columns" ? "md:grid-cols-3" : "md:grid-cols-2"
+        } gap-6`}
+      >
         {camps.map((camp) => (
           <Cart key={camp._id} camp={camp}></Cart>
         ))}

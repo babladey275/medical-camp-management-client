@@ -7,7 +7,7 @@ const Cart = ({ camp }) => {
         <img
           src={camp.image}
           alt={camp.name}
-          className="w-full h-64 object-cover"
+          className="w-full h-64 object-center overflow-hidden"
         />
       </figure>
       <div className="card-body">
