@@ -1,0 +1,92 @@
+[
+  {
+    "name": "Free Health Screening Camp",
+    "image": "https://i.ibb.co/7zTvzgS/31852.jpg",
+    "fees": 0,
+    "dateTime": "2025-02-15T09:00:00",
+    "location": "Community Center, Downtown",
+    "healthCareProfessional": "Dr. John Smith",
+    "participantCount": 150,
+    "description": "Free health screening for adults. Includes basic check-ups and blood pressure monitoring."
+  },
+  {
+    "name": "Child Vaccination Camp",
+    "image": "https://i.ibb.co/xYGNPj2/2148880484.jpg",
+    "fees": 0,
+    "dateTime": "2025-02-20T10:00:00",
+    "location": "City Hospital, Pediatric Wing",
+    "healthCareProfessional": "Dr. Emily Taylor",
+    "participantCount": 120,
+    "description": "A camp dedicated to vaccinating children against common diseases."
+  },
+  {
+    "name": "Diabetes Awareness and Screening",
+    "image": "https://i.ibb.co/RDqk1v5/26681.jpg",
+    "fees": 10,
+    "dateTime": "2025-03-01T08:00:00",
+    "location": "Health & Wellness Clinic, Eastside",
+    "healthCareProfessional": "Dr. David Lee",
+    "participantCount": 100,
+    "description": "An informative and screening camp focusing on diabetes prevention and management."
+  },
+  {
+    "name": "Eye Care Camp",
+    "image": "https://i.ibb.co/t31jPfh/2149230028.jpg",
+    "fees": 15,
+    "dateTime": "2025-03-10T09:30:00",
+    "location": "Vision Center, Main Street",
+    "healthCareProfessional": "Dr. Sarah Cooper",
+    "participantCount": 200,
+    "description": "Free eye check-ups, vision tests, and consultations with an ophthalmologist."
+  },
+  {
+    "name": "Mental Health Counseling Camp",
+    "image": "https://i.ibb.co/LdjK96Q/2149164276.jpg",
+    "fees": 20,
+    "dateTime": "2025-02-25T11:00:00",
+    "location": "Wellness Center, Park Avenue",
+    "healthCareProfessional": "Dr. Anna White",
+    "participantCount": 80,
+    "description": "Mental health screening and counseling services provided by licensed psychologists."
+  },
+  {
+    "name": "Dental Check-Up Camp",
+    "image": "https://i.ibb.co/Rv9WPpL/38933.jpg",
+    "fees": 25,
+    "dateTime": "2025-03-05T08:30:00",
+    "location": "Smiles Dental Clinic, Oak Street",
+    "healthCareProfessional": "Dr. Mark Johnson",
+    "participantCount": 150,
+    "description": "Free dental check-ups, cleanings, and consultations with a dentist."
+  },
+  {
+    "name": "Blood Donation Drive",
+    "image": "https://i.ibb.co/c2Yjpmc/2151117884.jpg",
+    "fees": 0,
+    "dateTime": "2025-02-18T09:00:00",
+    "location": "Red Cross Center, Riverside",
+    "healthCareProfessional": "Nurse Lisa Green",
+    "participantCount": 300,
+    "description": "Donate blood to save lives. Free health screening and snacks provided."
+  },
+  {
+    "name": "Cancer Screening Camp",
+    "image": "https://i.ibb.co/nkxv4tD/2149870296.jpg",
+    "fees": 30,
+    "dateTime": "2025-03-15T07:30:00",
+    "location": "Cancer Care Center, Westside",
+    "healthCareProfessional": "Dr. Linda Brown",
+    "participantCount": 120,
+    "description": "Early detection of cancer through screening and consultation with oncologists."
+  },
+  {
+    "name": "Senior Citizens Health Camp",
+    "image": "https://i.ibb.co/yn8zBSz/2148813462.jpg",
+    "fees": 0,
+    "dateTime": "2025-03-12T10:00:00",
+    "location": "Senior Citizens Home, Beach Road",
+    "healthCareProfessional": "Dr. Susan Clark",
+    "participantCount": 100,
+    "description": "Health screenings and consultations focused on the elderly, including mobility and cognitive tests."
+  }
+]

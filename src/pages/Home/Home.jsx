@@ -1,7 +1,9 @@
+import PopularCamps from "./PopularCamps";
+
 const Home = () => {
   return (
     <div>
-      <h3 className="text-4xl">this is home</h3>
+      <PopularCamps></PopularCamps>
     </div>
   );
 };
