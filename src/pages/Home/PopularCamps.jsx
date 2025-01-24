@@ -1,15 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
-import Cart from "../../components/Cart/Cart";
+
 import { Link } from "react-router-dom";
+import { FaMapMarkerAlt, FaUserFriends } from "react-icons/fa";
 
 const PopularCamps = () => {
   const axiosPublic = useAxiosPublic();
 
   const { data: camps = [] } = useQuery({
-    queryKey: ["camps"],
+    queryKey: ["camps", { limit: 6 }],
     queryFn: async () => {
-      const res = await axiosPublic.get("/camps");
+      const res = await axiosPublic.get("/camps", { params: { limit: 6 } });
       return res.data;
     },
   });
@@ -22,7 +23,50 @@ const PopularCamps = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {camps.map((camp) => (
-          <Cart key={camp._id} camp={camp}></Cart>
+          <div
+            key={camp._id}
+            className="card bg-base-100 shadow-md border border-gray-200"
+          >
+            <figure>
+              <img
+                src={camp.image}
+                alt={camp.name}
+                className="w-full h-64 object-cover"
+              />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title text-xl font-semibold">{camp.name}</h2>
+              <p className="text-gray-600">{camp.healthCareProfessional}</p>
+
+              <p className="flex items-center space-x-2 text-sm text-gray-500">
+                <FaMapMarkerAlt />
+                <span>{camp.location}</span>
+              </p>
+
+              <p className="flex items-center space-x-2 text-sm text-gray-500">
+                <FaUserFriends />
+                <span>{camp.participantCount} Participants</span>
+              </p>
+
+              <div className="mt-4 flex justify-between items-center">
+                <p>
+                  <span className="text-lg font-semibold mr-1">Fees:</span>
+                  <span className="text-lg font-semibold">
+                    {camp.fees === 0 ? "Free" : `$${camp.fees}`}
+                  </span>
+                </p>
+                <p className="text-sm text-gray-500">
+                  {new Date(camp.dateTime).toLocaleString()}
+                </p>
+              </div>
+
+              <div className="mt-4 flex justify-center">
+                <button className="btn hover:bg-[#3986d7] bg-[#399ced] w-full text-white">
+                  View Details
+                </button>
+              </div>
+            </div>
+          </div>
         ))}
       </div>
 
