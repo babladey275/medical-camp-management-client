@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   FaCalendarAlt,
   FaMapMarkedAlt,
@@ -6,7 +7,10 @@ import {
   FaUserMd,
   FaUsers,
 } from "react-icons/fa";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import JoinCampModal from "../../components/JoinCampModal/JoinCampModal";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const CampDetails = () => {
   const {
@@ -19,6 +23,34 @@ const CampDetails = () => {
     participantCount,
     description,
   } = useLoaderData();
+
+  const { user } = useAuth();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleJoinCamp = () => {
+    if (!user) {
+      Swal.fire({
+        title: "You are not logged in.",
+        text: "Please login to join this camp.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Login",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    } else {
+      setIsModalOpen(true);
+    }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div className="py-4 md:py-10">
@@ -89,12 +121,26 @@ const CampDetails = () => {
 
         {/* Join Button */}
         <div className="flex justify-center">
-          <button className="btn hover:bg-[#3986d7] bg-[#399ced] text-white">
+          <button
+            onClick={handleJoinCamp}
+            className="btn hover:bg-[#3986d7] bg-[#399ced] text-white"
+          >
             <FaRegUser size={20} />
             <span className="font-semibold">Join Camp</span>
           </button>
         </div>
       </div>
+
+      {/* modal */}
+      {isModalOpen && (
+        <JoinCampModal
+          closeModal={closeModal}
+          name={name}
+          fees={fees}
+          location={location}
+          healthCareProfessional={healthCareProfessional}
+        ></JoinCampModal>
+      )}
     </div>
   );
 };
