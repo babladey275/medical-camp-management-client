@@ -6,13 +6,16 @@ import { FaTh, FaThList } from "react-icons/fa";
 
 const AvailableCamps = () => {
   const axiosPublic = useAxiosPublic();
+  const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState("");
   const [layout, setLayout] = useState("three-columns");
 
-  const { data: camps = [], isLoading } = useQuery({
-    queryKey: ["camps", sortBy],
+  const { data: camps = [] } = useQuery({
+    queryKey: ["camps", sortBy, search],
     queryFn: async () => {
-      const res = await axiosPublic.get("/camps", { params: { sortBy } });
+      const res = await axiosPublic.get("/camps", {
+        params: { sortBy, search },
+      });
       return res.data;
     },
   });
@@ -27,17 +30,10 @@ const AvailableCamps = () => {
     );
   };
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex justify-center items-center">
-        <span className="loading loading-ring loading-lg"></span>
-      </div>
-    );
-  }
   return (
-    <div className="py-8">
-      <div>
-        <div className="mb-4 flex items-center">
+    <div className="py-4 md:py-8">
+      <div className="flex flex-col md:flex-row items-center mb-4 md:mb-6">
+        <div className="flex items-center flex-grow ml-2">
           {/* Sorting Dropdown */}
           <div className="dropdown dropdown-hover">
             <div
@@ -82,6 +78,30 @@ const AvailableCamps = () => {
               )}
             </button>
           </div>
+        </div>
+
+        {/* search */}
+        <div className="flex-grow">
+          <label className="input input-bordered flex items-center gap-2 max-w-xl">
+            <input
+              onChange={(e) => setSearch(e.target.value)}
+              type="text"
+              className="grow w-full"
+              placeholder="Search by name or location"
+            />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              className="h-4 w-4 opacity-70"
+            >
+              <path
+                fillRule="evenodd"
+                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </label>
         </div>
       </div>
 
