@@ -1,4 +1,5 @@
 import { FaMapMarkerAlt, FaUserFriends } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Cart = ({ camp }) => {
   return (
@@ -34,9 +35,12 @@ const Cart = ({ camp }) => {
         <p className="text-gray-700">{camp.description}</p>
 
         <div className="mt-4 flex justify-center">
-          <button className="btn hover:bg-[#3986d7] bg-[#399ced] w-full text-white">
+          <Link
+            to={`/camp-details/${camp._id}`}
+            className="btn hover:bg-[#3986d7] bg-[#399ced] w-full text-white"
+          >
             View Details
-          </button>
+          </Link>
         </div>
       </div>
     </div>

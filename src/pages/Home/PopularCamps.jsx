@@ -61,9 +61,12 @@ const PopularCamps = () => {
               </div>
 
               <div className="mt-4 flex justify-center">
-                <button className="btn hover:bg-[#3986d7] bg-[#399ced] w-full text-white">
+                <Link
+                  to={`/camp-details/${camp._id}`}
+                  className="btn hover:bg-[#3986d7] bg-[#399ced] w-full text-white"
+                >
                   View Details
-                </button>
+                </Link>
               </div>
             </div>
           </div>
