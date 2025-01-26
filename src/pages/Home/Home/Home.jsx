@@ -1,8 +1,10 @@
-import PopularCamps from "./PopularCamps";
+import Banner from "../Banner/Banner";
+import PopularCamps from "../PopularCamps/PopularCamps";
 
 const Home = () => {
   return (
     <div>
+      <Banner></Banner>
       <PopularCamps></PopularCamps>
     </div>
   );

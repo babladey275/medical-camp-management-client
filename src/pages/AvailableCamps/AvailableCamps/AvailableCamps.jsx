@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
-import Cart from "./Cart";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import Cart from "../Cart/Cart";
 import { useState } from "react";
 import { FaTh, FaThList } from "react-icons/fa";
 

@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../Layouts/MainLayout";
-import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
-import AvailableCamps from "../pages/AvailableCamps/AvailableCamps";
 import CampDetails from "../pages/CampDetails/CampDetails";
+import Home from "../pages/Home/Home/Home";
+import AvailableCamps from "../pages/AvailableCamps/AvailableCamps/AvailableCamps";
 
 export const router = createBrowserRouter([
   {

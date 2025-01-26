@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 import { Link } from "react-router-dom";
 import { FaMapMarkerAlt, FaUserFriends } from "react-icons/fa";
@@ -17,7 +17,7 @@ const PopularCamps = () => {
 
   return (
     <div className="py-8">
-      <h2 className="text-3xl text-center font-bold mb-8">
+      <h2 className="text-2xl md:text-4xl text-center font-bold mb-8">
         Popular Medical Camps
       </h2>
 
