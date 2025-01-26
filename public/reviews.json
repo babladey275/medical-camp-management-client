@@ -1,0 +1,38 @@
+[
+  {
+    "campName": "Free Health Screening Camp",
+    "reviewerName": "John Doe",
+    "details": "The camp was well-organized, and the staff was friendly. The screenings were thorough, though the waiting time was longer than expected. It would be great if they improved the waiting area. Overall, I gained valuable health insights.",
+    "rating": 4.0
+  },
+  {
+    "campName": "Child Vaccination Camp",
+    "reviewerName": "Sarah Johnson",
+    "details": "I took my daughter to the vaccination camp, and it was very efficient. The staff explained each vaccination clearly. The only suggestion is more volunteers for crowd control. Overall, a great experience.",
+    "rating": 4.7
+  },
+  {
+    "campName": "Diabetes Screening Camp",
+    "reviewerName": "David Lee",
+    "details": "The diabetes screening was very informative, and the staff was friendly. However, the follow-up process could have been clearer. Still, the camp was helpful in raising awareness about diabetes.",
+    "rating": 4.3
+  },
+  {
+    "campName": "Eye Care Camp",
+    "reviewerName": "Emma Martinez",
+    "details": "I had a great experience at the eye care camp. The exam was thorough, and I received free glasses. The waiting time was a bit long, but it was worth it. Would recommend it!",
+    "rating": 4.6
+  },
+  {
+    "campName": "Blood Donation Drive",
+    "reviewerName": "James Brown",
+    "details": "The blood donation camp was well-organized, and I felt comfortable donating. There could have been more seating and snacks afterward, but overall, it was a positive experience.",
+    "rating": 4.4
+  },
+  {
+    "campName": "Mental Health Awareness Camp",
+    "reviewerName": "Olivia Green",
+    "details": "The mental health camp was very supportive, and the counselors created a safe space. I wish it had been better promoted to reach more people, but it was an important and helpful event.",
+    "rating": 4.1
+  }
+]

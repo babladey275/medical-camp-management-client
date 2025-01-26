@@ -21,7 +21,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-[#399ced] text-white rounded-t-lg">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -75,10 +75,14 @@ const Navbar = () => {
                 {user?.displayName}
               </p>
               <li>
-                <Link>Dashboard</Link>
+                <Link to={"/dashboard"} className="text-black">
+                  Dashboard
+                </Link>
               </li>
               <li>
-                <button onClick={handleLogOut}>Logout</button>
+                <button onClick={handleLogOut} className="text-black">
+                  Logout
+                </button>
               </li>
             </ul>
           </div>

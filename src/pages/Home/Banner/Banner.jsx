@@ -35,12 +35,12 @@ const Banner = () => {
           <img
             src={camp.image}
             alt={camp.campName}
-            className="w-full h-[520px] object-center rounded-lg"
+            className="w-full h-96 md:h-[520px] object-center"
           />
 
-          <div className="absolute inset-0 bg-black opacity-60 rounded-lg">
+          <div className="absolute inset-0 bg-slate-700 bg-opacity-40">
             <div className="absolute inset-0 flex items-center justify-center text-white p-8">
-              <div className="text-center">
+              <div className="text-center max-w-3xl p-3 md:p-8 bg-black bg-opacity-50 rounded-xl">
                 <h2 className="text-2xl md:text-4xl font-bold mb-4">
                   {camp.campName}
                 </h2>
