@@ -7,6 +7,7 @@ import Home from "../pages/Home/Home/Home";
 import AvailableCamps from "../pages/AvailableCamps/AvailableCamps/AvailableCamps";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../pages/Dashboard/Dashboard/Dashboard";
+import AddCamp from "../pages/Dashboard/AddCamp/AddCamp";
 
 export const router = createBrowserRouter([
   {
@@ -44,5 +45,11 @@ export const router = createBrowserRouter([
         <Dashboard />
       </PrivateRoute>
     ),
+    children: [
+      {
+        path: "add-camp",
+        element: <AddCamp />,
+      },
+    ],
   },
 ]);
