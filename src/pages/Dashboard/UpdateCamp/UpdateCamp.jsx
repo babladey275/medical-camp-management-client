@@ -2,15 +2,27 @@ import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
-const AddCamp = () => {
+const UpdateCamp = () => {
+  const {
+    _id,
+    name,
+    fees,
+    dateTime,
+    location,
+    healthCareProfessional,
+    participantCount,
+    description,
+  } = useLoaderData();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm();
   const axiosPublic = useAxiosPublic();
@@ -37,25 +49,25 @@ const AddCamp = () => {
         participantCount: Number(data.participantCount),
         description: data.description,
       };
-      const campRes = await axiosSecure.post("/camps", camp);
+      const campRes = await axiosSecure.patch(`/camps/${_id}`, camp);
       console.log(campRes.data);
 
-      if (campRes.data.insertedId) {
-        reset();
+      if (campRes.data.modifiedCount > 0) {
         Swal.fire({
           position: "top",
           icon: "success",
-          title: `${data.campName} is added to the camp.`,
+          title: `${data.campName} is updated to the camp.`,
           showConfirmButton: false,
           timer: 2000,
         });
+        navigate("/dashboard/manage-camps");
       }
     }
   };
 
   return (
     <div className="max-w-2xl bg-base-200 mx-auto p-8 rounded-lg shadow-lg">
-      <h2 className="text-3xl font-semibold text-center mb-6">Add a Camp</h2>
+      <h2 className="text-3xl font-semibold text-center mb-6">Update Camp</h2>
 
       {/* Form */}
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -64,6 +76,7 @@ const AddCamp = () => {
           <label className="block mb-2 text-sm font-medium">Camp Name</label>
           <input
             type="text"
+            defaultValue={name}
             {...register("campName", { required: "Camp Name is required" })}
             className="w-full p-3 bg-white text-gray-800 rounded-lg border-2"
           />
@@ -92,6 +105,7 @@ const AddCamp = () => {
           <label className="block mb-2 text-sm font-medium">Camp Fees</label>
           <input
             type="number"
+            defaultValue={fees}
             {...register("campFees", {
               required: "Camp Fees is required",
               min: { value: 0, message: "Fees cannot be negative" },
@@ -110,6 +124,7 @@ const AddCamp = () => {
           <label className="block mb-2 text-sm font-medium">Date & Time</label>
           <input
             type="datetime-local"
+            defaultValue={dateTime}
             {...register("dateTime", { required: "Date & Time is required" })}
             className="w-full p-3 bg-white text-gray-800 rounded-lg border-2"
           />
@@ -125,6 +140,7 @@ const AddCamp = () => {
           <label className="block mb-2 text-sm font-medium">Location</label>
           <input
             type="text"
+            defaultValue={location}
             {...register("location", { required: "Location is required" })}
             className="w-full p-3 bg-white text-gray-800 rounded-lg border-2"
           />
@@ -145,6 +161,7 @@ const AddCamp = () => {
           </label>
           <input
             type="text"
+            defaultValue={healthCareProfessional}
             {...register("healthcareName", {
               required: "Healthcare Professional Name is required",
             })}
@@ -167,7 +184,7 @@ const AddCamp = () => {
           </label>
           <input
             type="number"
-            defaultValue={0}
+            defaultValue={participantCount}
             {...register("participantCount")}
             className="w-full p-3 bg-white text-gray-800 rounded-lg border-2 border-transparent focus:ring-2 focus:ring-purple-400 focus:border-purple-500 transition-all"
             disabled
@@ -183,6 +200,7 @@ const AddCamp = () => {
             Description
           </label>
           <textarea
+            defaultValue={description}
             {...register("description", {
               required: "Description is required",
             })}
@@ -201,7 +219,7 @@ const AddCamp = () => {
             type="submit"
             className="btn hover:bg-[#3986d7] bg-[#399ced] text-white w-full"
           >
-            Add Camp
+            Update Camp
           </button>
         </div>
       </form>
@@ -209,4 +227,4 @@ const AddCamp = () => {
   );
 };
 
-export default AddCamp;
+export default UpdateCamp;

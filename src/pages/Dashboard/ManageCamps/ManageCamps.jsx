@@ -30,7 +30,7 @@ const ManageCamps = () => {
     }).then(async (result) => {
       console.log(result);
       if (result.isConfirmed) {
-        const res = await axiosSecure.delete(`/delete-camp/${id}`);
+        const res = await axiosSecure.delete(`/camps/${id}`);
         if (res.data.deletedCount > 0) {
           refetch();
 
@@ -74,7 +74,7 @@ const ManageCamps = () => {
                 <td>{camp.dateTime}</td>
                 <td>
                   <Link
-                    to={`/dashboard/manage-items/update-item/${camp._id}`}
+                    to={`/dashboard/manage-camps/update-camp/${camp._id}`}
                     className="btn btn-sm hover:bg-[#3986d7] bg-[#399ced]"
                   >
                     <FaRegEdit className="text-white" />
