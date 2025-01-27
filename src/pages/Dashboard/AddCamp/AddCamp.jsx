@@ -1,14 +1,56 @@
 import { useForm } from "react-hook-form";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddCamp = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
+  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+
+    const imageFile = { image: data.image[0] };
+    const res = await axiosPublic.post(image_hosting_api, imageFile, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    if (res.data.success) {
+      const camp = {
+        name: data.campName,
+        image: res.data.data.display_url,
+        fees: parseFloat(data.campFees),
+        dateTime: data.dateTime,
+        location: data.location,
+        healthCareProfessional: data.healthcareName,
+        participantCount: Number(data.participantCount),
+        description: data.description,
+      };
+      const campRes = await axiosSecure.post("/camps", camp);
+      console.log(campRes.data);
+
+      if (campRes.data.insertedId) {
+        reset();
+        Swal.fire({
+          position: "top",
+          icon: "success",
+          title: `${data.campName} is added to the camp.`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    }
   };
 
   return (
@@ -126,9 +168,7 @@ const AddCamp = () => {
           <input
             type="number"
             defaultValue={0}
-            {...register("participantCount", {
-              required: "Participant Count is required",
-            })}
+            {...register("participantCount")}
             className="w-full p-3 bg-white text-gray-800 rounded-lg border-2 border-transparent focus:ring-2 focus:ring-purple-400 focus:border-purple-500 transition-all"
             disabled
           />
