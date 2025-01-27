@@ -47,7 +47,7 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <a className="btn btn-ghost hover:bg-white">
+        <a className="btn btn-ghost hover:bg-[#399ced]">
           <img src={logo} alt="" className="w-10" />
           <h2 className="md:text-2xl">Medical Camp</h2>
         </a>

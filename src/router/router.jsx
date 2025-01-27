@@ -8,6 +8,8 @@ import AvailableCamps from "../pages/AvailableCamps/AvailableCamps/AvailableCamp
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../pages/Dashboard/Dashboard/Dashboard";
 import AddCamp from "../pages/Dashboard/AddCamp/AddCamp";
+import AdminRoute from "./AdminRoute";
+import ManageCamps from "../pages/Dashboard/ManageCamps/ManageCamps";
 
 export const router = createBrowserRouter([
   {
@@ -48,7 +50,19 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "add-camp",
-        element: <AddCamp />,
+        element: (
+          <AdminRoute>
+            <AddCamp />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manage-camps",
+        element: (
+          <AdminRoute>
+            <ManageCamps />
+          </AdminRoute>
+        ),
       },
     ],
   },

@@ -41,13 +41,17 @@ const SideNavbar = () => {
               </NavLink>
             </li>
             <li>
-              <Link
-                to="/manage-camps"
-                className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-700"
+              <NavLink
+                to="/dashboard/manage-camps"
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-white text-gray-700 p-2 font-bold flex items-center space-x-2 rounded-lg"
+                    : "flex space-x-2 items-center p-2 rounded-lg hover:bg-gray-700"
+                }
               >
                 <FaListAlt className="text-xl" />
                 <span>Manage Camps</span>
-              </Link>
+              </NavLink>
             </li>
             <li>
               <Link
