@@ -19,13 +19,17 @@ const SideNavbar = () => {
         {isAdmin ? (
           <>
             <li>
-              <Link
-                to="/organizer-profile"
-                className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-700"
+              <NavLink
+                to="/dashboard/profile"
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-white text-gray-700 p-2 font-bold flex items-center space-x-2 rounded-lg"
+                    : "flex space-x-2 items-center p-2 rounded-lg hover:bg-gray-700"
+                }
               >
                 <FaUserTie className="text-xl" />
                 <span>Organizer Profile</span>
-              </Link>
+              </NavLink>
             </li>
             <li>
               <NavLink
