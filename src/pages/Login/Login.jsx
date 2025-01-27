@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const Login = () => {
   const {
@@ -96,8 +97,8 @@ const Login = () => {
             </Link>
           </p>
           <div className="divider my-4">Or Login with</div>
-          <div className="flex justify-center space-x-4 mt-4">
-            <button className="btn btn-outline w-full">Google</button>
+          <div className="mt-4">
+            <SocialLogin />
           </div>
         </div>
       </div>
