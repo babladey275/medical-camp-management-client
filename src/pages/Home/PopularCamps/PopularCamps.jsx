@@ -73,7 +73,7 @@ const PopularCamps = () => {
         ))}
       </div>
 
-      <div className="flex justify-center mt-8">
+      <div className="flex justify-end mr-12 mt-8">
         <Link
           to={"/available-camps"}
           className="btn hover:bg-[#3986d7] bg-[#399ced] text-white"
