@@ -21,12 +21,10 @@ const SignUp = () => {
   const from = location.state?.from?.pathname || "/";
 
   const onSubmit = (data) => {
-    console.log(data);
-
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+
         updateUserProfile(data.name, data.photoURL)
           .then(() => {
             // create user entry in the database

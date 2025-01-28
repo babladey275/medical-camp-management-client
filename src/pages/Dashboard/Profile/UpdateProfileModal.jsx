@@ -10,8 +10,6 @@ const UpdateProfileModal = ({ closeModal, name, email, image, phone, id }) => {
   const axiosSecure = useAxiosSecure();
 
   const onSubmit = async (data) => {
-    console.log("Form Submitted:", data);
-
     const userInfo = {
       name: data.name,
       email: data.email,
@@ -20,7 +18,7 @@ const UpdateProfileModal = ({ closeModal, name, email, image, phone, id }) => {
     };
 
     const res = await axiosSecure.patch(`/users/${id}`, userInfo);
-    console.log(res.data);
+    // console.log(res.data);
 
     closeModal();
   };

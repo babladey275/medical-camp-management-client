@@ -22,7 +22,6 @@ const JoinCampModal = ({
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log("Form Submitted:", data);
     const registerCamps = {
       campId: id,
       campName: name,
@@ -37,7 +36,6 @@ const JoinCampModal = ({
       emergencyContact: data.emergencyContact,
     };
     const res = await axiosSecure.post("/register-camps", registerCamps);
-    console.log(res.data);
 
     if (res.data.insertedId) {
       updateParticipantCount();

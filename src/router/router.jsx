@@ -12,6 +12,7 @@ import AdminRoute from "./AdminRoute";
 import ManageCamps from "../pages/Dashboard/ManageCamps/ManageCamps";
 import UpdateCamp from "../pages/Dashboard/UpdateCamp/UpdateCamp";
 import Profile from "../pages/Dashboard/Profile/Profile";
+import RegisteredCamps from "../pages/Dashboard/RegisteredCamps/RegisteredCamps";
 
 export const router = createBrowserRouter([
   {
@@ -30,7 +31,9 @@ export const router = createBrowserRouter([
         path: "camp-details/:campId",
         element: <CampDetails />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/camps/${params.campId}`),
+          fetch(
+            `https://medical-camp-management-server-xi.vercel.app/camps/${params.campId}`
+          ),
       },
       {
         path: "login",
@@ -78,7 +81,13 @@ export const router = createBrowserRouter([
           </AdminRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/camps/${params.id}`),
+          fetch(
+            `https://medical-camp-management-server-xi.vercel.app/camps/${params.id}`
+          ),
+      },
+      {
+        path: "registered-camps",
+        element: <RegisteredCamps />,
       },
     ],
   },

@@ -18,7 +18,6 @@ const ManageCamps = () => {
   });
 
   const handleDelete = (id) => {
-    console.log(id);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -28,7 +27,6 @@ const ManageCamps = () => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
-      console.log(result);
       if (result.isConfirmed) {
         const res = await axiosSecure.delete(`/camps/${id}`);
         if (res.data.deletedCount > 0) {
