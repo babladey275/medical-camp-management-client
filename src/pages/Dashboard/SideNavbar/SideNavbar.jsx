@@ -70,21 +70,25 @@ const SideNavbar = () => {
         ) : (
           <>
             <li>
+              <NavLink
+                to="/dashboard/profile"
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-white text-gray-700 p-2 font-bold flex items-center space-x-2 rounded-lg"
+                    : "flex space-x-2 items-center p-2 rounded-lg hover:bg-gray-700"
+                }
+              >
+                <FaUserAlt className="text-xl" />
+                <span>Participant Profile</span>
+              </NavLink>
+            </li>
+            <li>
               <Link
                 to="/analytics"
                 className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-700"
               >
                 <FaChartBar className="text-xl" />
                 <span>Analytics</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/participant-profile"
-                className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-700"
-              >
-                <FaUserAlt className="text-xl" />
-                <span>Participant Profile</span>
               </Link>
             </li>
             <li>

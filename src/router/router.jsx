@@ -52,11 +52,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "profile",
-        element: (
-          <AdminRoute>
-            <Profile />
-          </AdminRoute>
-        ),
+        element: <Profile />,
       },
       {
         path: "add-camp",
@@ -85,5 +81,14 @@ export const router = createBrowserRouter([
           fetch(`http://localhost:5000/camps/${params.id}`),
       },
     ],
+  },
+
+  {
+    path: "*",
+    element: (
+      <h1 className="text-center text-red-600 text-4xl font-bold mt-20">
+        Oops! Page not found.
+      </h1>
+    ),
   },
 ]);

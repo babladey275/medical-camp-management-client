@@ -64,7 +64,7 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img alt="Tailwind CSS Navbar component" src={user?.photoURL} />
+                <img src={user?.photoURL} alt="user" />
               </div>
             </div>
             <ul
@@ -75,7 +75,7 @@ const Navbar = () => {
                 {user?.displayName}
               </p>
               <li>
-                <Link to={"/dashboard"} className="text-black">
+                <Link to={"/dashboard/profile"} className="text-black">
                   Dashboard
                 </Link>
               </li>

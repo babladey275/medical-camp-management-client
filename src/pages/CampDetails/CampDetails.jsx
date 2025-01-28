@@ -14,6 +14,7 @@ import Swal from "sweetalert2";
 
 const CampDetails = () => {
   const {
+    _id,
     name,
     image,
     fees,
@@ -27,6 +28,7 @@ const CampDetails = () => {
   const { user } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const [count, setCount] = useState(participantCount);
 
   const handleJoinCamp = () => {
     if (!user) {
@@ -50,6 +52,10 @@ const CampDetails = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const updateParticipantCount = () => {
+    setCount(count + 1);
   };
 
   return (
@@ -105,7 +111,7 @@ const CampDetails = () => {
               <FaUsers size={24} className="text-blue-600" />
               <div>
                 <p className="font-semibold text-lg">Participants</p>
-                <p>{participantCount}</p>
+                <p>{count}</p>
               </div>
             </div>
             {/* Camp Fees */}
@@ -135,10 +141,12 @@ const CampDetails = () => {
       {isModalOpen && (
         <JoinCampModal
           closeModal={closeModal}
+          id={_id}
           name={name}
           fees={fees}
           location={location}
           healthCareProfessional={healthCareProfessional}
+          updateParticipantCount={updateParticipantCount}
         ></JoinCampModal>
       )}
     </div>

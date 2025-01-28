@@ -1,14 +1,19 @@
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const JoinCampModal = ({
   closeModal,
+  id,
   name,
   fees,
   location,
   healthCareProfessional,
+  updateParticipantCount,
 }) => {
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
 
   const {
     register,
@@ -16,9 +21,34 @@ const JoinCampModal = ({
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log("Form Submitted:", data);
-    closeModal();
+    const registerCamps = {
+      campId: id,
+      campName: name,
+      fees: fees,
+      location: location,
+      healthcareName: healthCareProfessional,
+      participantName: user?.displayName,
+      participantEmail: user?.email,
+      age: Number(data.age),
+      phone: data.phoneNumber,
+      gender: data.gender,
+      emergencyContact: data.emergencyContact,
+    };
+    const res = await axiosSecure.post("/register-camps", registerCamps);
+    console.log(res.data);
+
+    if (res.data.insertedId) {
+      updateParticipantCount();
+      Swal.fire({
+        title: "Success!",
+        text: "You have successfully joined the camp.",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+      closeModal();
+    }
   };
 
   return (
