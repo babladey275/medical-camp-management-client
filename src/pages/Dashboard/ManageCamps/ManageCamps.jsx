@@ -52,7 +52,7 @@ const ManageCamps = () => {
         <table className="table">
           {/* head */}
           <thead className="bg-[#399ced] text-white">
-            <tr>
+            <tr className="text-sm">
               <th>#</th>
               <th>Camp Name</th>
               <th>Healthcare Professional</th>

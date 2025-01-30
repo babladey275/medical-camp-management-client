@@ -3,8 +3,11 @@ import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import FeedbackModal from "../../../components/FeedbackModal/FeedbackModal";
 
 const RegisteredCamps = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -47,6 +50,10 @@ const RegisteredCamps = () => {
 
   const handlePay = (camp) => {
     navigate("/dashboard/payment", { state: { camp } });
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -110,7 +117,12 @@ const RegisteredCamps = () => {
                   </button>
                 </td>
                 <td>
-                  <button className="btn btn-sm bg-gradient-to-r from-[#389ba8] to-[#2578bc] text-white font-medium rounded-lg px-6 py-2 shadow-md duration-200 ease-in-out">
+                  <button
+                    onClick={() => {
+                      setIsModalOpen(true);
+                    }}
+                    className="btn btn-sm bg-gradient-to-r from-[#389ba8] to-[#2578bc] text-white font-medium rounded-lg px-6 shadow-md duration-200 ease-in-out"
+                  >
                     Feedback
                   </button>
                 </td>
@@ -119,6 +131,9 @@ const RegisteredCamps = () => {
           </tbody>
         </table>
       </div>
+
+      {/* modal */}
+      {isModalOpen && <FeedbackModal closeModal={closeModal}></FeedbackModal>}
     </div>
   );
 };
