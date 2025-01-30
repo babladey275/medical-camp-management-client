@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
   FaPlusCircle,
   FaListAlt,
@@ -58,13 +58,17 @@ const SideNavbar = () => {
               </NavLink>
             </li>
             <li>
-              <Link
-                to="/manage-registered-camps"
-                className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-700"
+              <NavLink
+                to="/dashboard/manage-registered-camps"
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-white text-gray-700 p-2 font-bold flex items-center space-x-2 rounded-lg"
+                    : "flex space-x-2 items-center p-2 rounded-lg hover:bg-gray-700"
+                }
               >
                 <FaRegistered className="text-xl" />
                 <span>Manage Registered Camps</span>
-              </Link>
+              </NavLink>
             </li>
           </>
         ) : (
@@ -83,13 +87,17 @@ const SideNavbar = () => {
               </NavLink>
             </li>
             <li>
-              <Link
-                to="/analytics"
-                className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-700"
+              <NavLink
+                to="/dashboard/analytics"
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-white text-gray-700 p-2 font-bold flex items-center space-x-2 rounded-lg"
+                    : "flex space-x-2 items-center p-2 rounded-lg hover:bg-gray-700"
+                }
               >
                 <FaChartBar className="text-xl" />
                 <span>Analytics</span>
-              </Link>
+              </NavLink>
             </li>
             <li>
               <NavLink
@@ -105,13 +113,17 @@ const SideNavbar = () => {
               </NavLink>
             </li>
             <li>
-              <Link
-                to="/payment-history"
-                className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-700"
+              <NavLink
+                to="/dashboard/payment-history"
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-white text-gray-700 p-2 font-bold flex items-center space-x-2 rounded-lg"
+                    : "flex space-x-2 items-center p-2 rounded-lg hover:bg-gray-700"
+                }
               >
                 <FaHistory className="text-xl" />
                 <span>Payment History</span>
-              </Link>
+              </NavLink>
             </li>
           </>
         )}

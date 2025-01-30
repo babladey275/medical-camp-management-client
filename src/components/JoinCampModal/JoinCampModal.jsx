@@ -35,7 +35,7 @@ const JoinCampModal = ({
       gender: data.gender,
       emergencyContact: data.emergencyContact,
     };
-    const res = await axiosSecure.post("/register-camps", registerCamps);
+    const res = await axiosSecure.post("/registered-camps", registerCamps);
 
     if (res.data.insertedId) {
       updateParticipantCount();
