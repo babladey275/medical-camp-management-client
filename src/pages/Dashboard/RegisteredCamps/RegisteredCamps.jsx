@@ -49,7 +49,7 @@ const RegisteredCamps = () => {
   };
 
   const handlePay = (camp) => {
-    navigate("/dashboard/payment", { state: { camp } });
+    navigate("/dashboard/registered-camps/payment", { state: { camp } });
   };
 
   const closeModal = () => {
@@ -111,7 +111,7 @@ const RegisteredCamps = () => {
                     onClick={() => {
                       handleDelete(camp._id);
                     }}
-                    className="btn btn-error btn-sm"
+                    className="btn btn-error btn-sm text-white"
                   >
                     X
                   </button>

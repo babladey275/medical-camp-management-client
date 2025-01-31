@@ -66,11 +66,13 @@ const CheckoutForm = ({ camp }) => {
         // Now save the payment in the database
         const payment = {
           email: user.email,
+          campName: camp.campName,
           fees,
           transactionId: paymentIntent.id,
           date: new Date(),
           registerId: camp._id,
-          status: "pending",
+          paymentStatus: "Paid",
+          confirmStatus: "Pending",
         };
 
         const res = await axiosSecure.post("/payments", payment);

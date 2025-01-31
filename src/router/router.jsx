@@ -91,7 +91,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "manage-registered-camps",
-        element: <ManageRegisteredCamps />,
+        element: (
+          <AdminRoute>
+            <ManageRegisteredCamps />
+          </AdminRoute>
+        ),
       },
       {
         path: "registered-camps",
@@ -102,7 +106,7 @@ export const router = createBrowserRouter([
         element: <Analytics />,
       },
       {
-        path: "payment",
+        path: "registered-camps/payment",
         element: <Payment />,
       },
       {
