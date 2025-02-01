@@ -25,8 +25,8 @@ const PaymentHistory = () => {
               <th>#</th>
               <th>Camp Name</th>
               <th>Camp Fees</th>
-              <th>Payment Status</th>
               <th>Transaction Id</th>
+              <th>Confirm Status</th>
             </tr>
           </thead>
           <tbody>
@@ -35,8 +35,8 @@ const PaymentHistory = () => {
                 <td>{index + 1}</td>
                 <td>{item.campName}</td>
                 <td>${item.fees}</td>
-                <td>{item.paymentStatus}</td>
                 <td>{item.transactionId}</td>
+                <td>{item.confirmStatus}</td>
               </tr>
             ))}
           </tbody>

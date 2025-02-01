@@ -55,7 +55,7 @@ const Profile = () => {
             <FaEnvelope /> {userData?.email}
           </p>
           <p className="text-gray-600 text-lg flex items-center gap-2">
-            <FaPhoneAlt />{" "}
+            <FaPhoneAlt />
             {userData?.phone || (
               <span className="text-red-600">Add Your Phone Number</span>
             )}

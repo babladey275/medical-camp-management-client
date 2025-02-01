@@ -44,7 +44,10 @@ const ManageRegisteredCamps = () => {
     });
     console.log(res.data);
 
-    if (res.data.result.modifiedCount > 0) {
+    if (
+      res.data.result.modifiedCount > 0 &&
+      res.data.paymentResult.modifiedCount > 0
+    ) {
       refetch();
       Swal.fire({
         position: "top",
@@ -84,27 +87,40 @@ const ManageRegisteredCamps = () => {
                 <td>{camp?.paymentStatus ? camp.paymentStatus : "Unpaid"}</td>
                 <td>
                   {camp?.confirmStatus ? (
-                    "Confirmed"
-                  ) : (
+                    camp.confirmStatus
+                  ) : camp.paymentStatus ? (
                     <button
                       onClick={() => {
                         handleConfirm(camp);
                       }}
-                      className="btn btn-sm font-semibold"
+                      className="btn btn-sm btn-warning"
                     >
+                      Pending
+                    </button>
+                  ) : (
+                    <button disabled className="btn btn-sm btn-warning">
                       Pending
                     </button>
                   )}
                 </td>
                 <td>
-                  <button
-                    onClick={() => {
-                      handleDelete(camp._id);
-                    }}
-                    className="btn btn-error btn-sm"
-                  >
-                    X
-                  </button>
+                  {camp.paymentStatus && camp.confirmStatus ? (
+                    <button
+                      disabled
+                      className="btn btn-error btn-sm text-white"
+                    >
+                      X
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        handleDelete(camp._id);
+                      }}
+                      className="btn btn-error btn-sm text-white"
+                    >
+                      X
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}

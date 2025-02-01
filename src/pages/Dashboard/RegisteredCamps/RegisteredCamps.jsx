@@ -80,7 +80,7 @@ const RegisteredCamps = () => {
               <tr key={camp._id}>
                 <td>{index + 1}</td>
                 <td>{camp.campName}</td>
-                <td>{camp.fees}</td>
+                <td>${camp.fees}</td>
                 <td>{camp.participantName}</td>
                 <td>
                   {camp?.paymentStatus ? (
@@ -88,7 +88,7 @@ const RegisteredCamps = () => {
                       disabled
                       className="btn btn-sm disabled:bg-gray-400 disabled:cursor-not-allowed disabled:text-white"
                     >
-                      Paid
+                      {camp.paymentStatus}
                     </button>
                   ) : (
                     <button
@@ -117,14 +117,20 @@ const RegisteredCamps = () => {
                   </button>
                 </td>
                 <td>
-                  <button
-                    onClick={() => {
-                      setIsModalOpen(true);
-                    }}
-                    className="btn btn-sm bg-gradient-to-r from-[#389ba8] to-[#2578bc] text-white font-medium rounded-lg px-6 shadow-md duration-200 ease-in-out"
-                  >
-                    Feedback
-                  </button>
+                  {camp?.paymentStatus && camp?.confirmStatus ? (
+                    <button
+                      onClick={() => {
+                        setIsModalOpen(true);
+                      }}
+                      className="btn btn-sm bg-gradient-to-r from-[#389ba8] to-[#2578bc] text-white font-medium rounded-lg px-6 duration-200 ease-in-out"
+                    >
+                      Feedback
+                    </button>
+                  ) : (
+                    <button disabled className="btn btn-sm px-6">
+                      Feedback
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}
