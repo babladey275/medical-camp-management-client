@@ -42,20 +42,20 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-base-100 text-gray-700 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             {links}
           </ul>
         </div>
-        <a className="btn btn-ghost hover:bg-[#399ced]">
-          <img src={logo} alt="" className="w-10" />
-          <h2 className="md:text-2xl">Medical Camp</h2>
-        </a>
-      </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{links}</ul>
+        <Link to={"/"} className="flex items-center gap-1 cursor-pointer">
+          <img src={logo} alt="" className="w-5 md:w-10" />
+          <h2 className="md:text-2xl text-sm">Medical Camp</h2>
+        </Link>
       </div>
       <div className="navbar-end">
+        <div className="hidden lg:flex">
+          <ul className="menu menu-horizontal px-2">{links}</ul>
+        </div>
         {user ? (
           <div className="dropdown dropdown-end">
             <div
@@ -88,7 +88,7 @@ const Navbar = () => {
           </div>
         ) : (
           <Link to={"/login"}>
-            <button className="btn btn-outline text-white text-sm">
+            <button className="btn btn-outline btn-sm md:btn-md text-white text-sm">
               Join Us
             </button>
           </Link>

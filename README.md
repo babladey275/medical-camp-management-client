@@ -84,7 +84,7 @@ Medical Camp is a comprehensive platform designed for managing and organizing va
 
 ### Admin Access
 
-**UserName**: admin@admin.com
+**User**: admin@admin.com
 **Password**: Admin123@
 
 **live link**: https://medical-camp-bb0ac.web.app/
