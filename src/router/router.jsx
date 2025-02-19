@@ -17,6 +17,7 @@ import ManageRegisteredCamps from "../pages/Dashboard/ManageRegisteredCamps.jsx/
 import Analytics from "../pages/Dashboard/Analytics/Analytics";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
 import Payment from "../components/Payment/Payment";
+import ErrorPage from "../components/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
   {
@@ -118,10 +119,6 @@ export const router = createBrowserRouter([
 
   {
     path: "*",
-    element: (
-      <h1 className="text-center text-red-600 text-4xl font-bold mt-20">
-        Oops! Page not found.
-      </h1>
-    ),
+    element: <ErrorPage></ErrorPage>,
   },
 ]);
