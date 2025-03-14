@@ -44,14 +44,14 @@ const ManageCamps = () => {
 
   return (
     <div>
-      <h2 className="text-3xl text-center pb-6 font-semibold">
+      <h2 className="md:text-3xl text-xl text-center pb-6 font-semibold">
         Manage All Camps
       </h2>
 
       <div className="overflow-x-auto rounded-t-lg">
         <table className="table">
           {/* head */}
-          <thead className="bg-[#399ced] text-white">
+          <thead className="bg-[#3986d7] text-white">
             <tr className="text-sm">
               <th>#</th>
               <th>Camp Name</th>
@@ -73,7 +73,7 @@ const ManageCamps = () => {
                 <td>
                   <Link
                     to={`/dashboard/manage-camps/update-camp/${camp._id}`}
-                    className="btn btn-sm hover:bg-[#3986d7] bg-[#399ced]"
+                    className="btn btn-sm bg-[#3986d7] hover:bg-[#3075c0]"
                   >
                     <FaRegEdit className="text-white" />
                   </Link>

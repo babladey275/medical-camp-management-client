@@ -32,14 +32,14 @@ const AvailableCamps = () => {
 
   return (
     <div className="py-4 md:py-8">
-      <div className="flex flex-col md:flex-row items-center mb-4 md:mb-6">
-        <div className="flex items-center flex-grow ml-2">
+      <div className="flex flex-col-reverse md:flex-row md:items-center mb-4 md:mb-6">
+        <div className="flex items-center flex-grow ml-2 mt-3 md:mt-0">
           {/* Sorting Dropdown */}
           <div className="dropdown dropdown-hover">
             <div
               tabIndex={0}
               role="button"
-              className="btn bg-[#399ced] hover:bg-[#3986d7] text-white m-1"
+              className="btn bg-[#3986d7] hover:bg-[#3075c0] text-white m-1"
             >
               Sort By
             </div>
@@ -69,7 +69,7 @@ const AvailableCamps = () => {
           <div className="hidden md:block">
             <button
               onClick={toggleLayout}
-              className="btn bg-[#399ced] hover:bg-[#3986d7] text-white"
+              className="btn bg-[#3986d7] hover:bg-[#3075c0] text-white"
             >
               {layout === "three-columns" ? (
                 <FaTh className="text-xl" />
@@ -81,12 +81,12 @@ const AvailableCamps = () => {
         </div>
 
         {/* search */}
-        <div className="flex-grow">
-          <label className="input input-bordered flex items-center gap-2 max-w-xl">
+        <div className="flex-1 mr-2 w-[95%] mx-auto">
+          <label className="input input-bordered flex items-center gap-2 max-w-xl p-1 border-blue-500 border-2 rounded-lg focus-within:border-gray-100 focus-within:ring-2 focus-within:ring-blue-500 transition duration-200">
             <input
               onChange={(e) => setSearch(e.target.value)}
               type="text"
-              className="grow w-full"
+              className="grow w-full py-2 px-3 text-gray-700 rounded-md outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Search by name or location"
             />
             <svg

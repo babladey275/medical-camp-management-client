@@ -35,7 +35,7 @@ const Banner = () => {
           <img
             src={camp.image}
             alt={camp.campName}
-            className="w-full h-96 md:h-[520px] object-center"
+            className="w-full h-96 md:h-[520px] lg:h-[600px] object-center"
           />
 
           <div className="absolute inset-0 bg-slate-700 bg-opacity-40">

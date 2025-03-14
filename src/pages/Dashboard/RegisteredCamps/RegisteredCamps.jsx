@@ -12,16 +12,27 @@ const RegisteredCamps = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  const { data: registeredCamps = [], refetch } = useQuery({
+  const {
+    data: registeredCamps = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["registered-camps", user?.email],
     queryFn: async () => {
       if (user?.email) {
         const res = await axiosSecure.get(`/registered-camps/${user.email}`);
-
         return res.data;
       }
     },
   });
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <span className="loading loading-ring loading-lg"></span>
+      </div>
+    );
+  }
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -58,87 +69,94 @@ const RegisteredCamps = () => {
 
   return (
     <div>
-      <h2 className="text-3xl font-semibold text-center mb-8">
+      <h2 className="md:text-3xl text-xl font-semibold text-center mb-8">
         Manage Your Registered Camps
       </h2>
-      <div className="overflow-x-auto rounded-t-lg">
-        <table className="table">
-          <thead className="bg-[#399ced] text-white">
-            <tr className="text-sm">
-              <th>#</th>
-              <th>Camp Name</th>
-              <th>Camp Fees</th>
-              <th>Participant Name</th>
-              <th>Payment Status</th>
-              <th>Confirmation Status</th>
-              <th>Cancel</th>
-              <th>Feedback</th>
-            </tr>
-          </thead>
-          <tbody>
-            {registeredCamps.map((camp, index) => (
-              <tr key={camp._id}>
-                <td>{index + 1}</td>
-                <td>{camp.campName}</td>
-                <td>${camp.fees}</td>
-                <td>{camp.participantName}</td>
-                <td>
-                  {camp?.paymentStatus ? (
-                    <button
-                      disabled
-                      className="btn btn-sm disabled:bg-gray-400 disabled:cursor-not-allowed disabled:text-white"
-                    >
-                      {camp.paymentStatus}
-                    </button>
-                  ) : (
-                    <button
-                      onClick={() => handlePay(camp)}
-                      className="btn hover:bg-[#3986d7] bg-[#277dc3] text-white"
-                    >
-                      Pay
-                    </button>
-                  )}
-                </td>
-                <td>
-                  {camp?.confirmStatus ? (
-                    "Confirmed"
-                  ) : (
-                    <p className="font-semibold">Pending</p>
-                  )}
-                </td>
-                <td>
-                  <button
-                    onClick={() => {
-                      handleDelete(camp._id);
-                    }}
-                    className="btn btn-error btn-sm text-white"
-                  >
-                    X
-                  </button>
-                </td>
-                <td>
-                  {camp?.paymentStatus && camp?.confirmStatus ? (
+
+      {registeredCamps.length === 0 ? (
+        <div className="text-center text-xl font-medium text-gray-600 mb-10">
+          <p>No registered camps available!</p>
+        </div>
+      ) : (
+        <div className="overflow-x-auto rounded-t-lg">
+          <table className="table w-full">
+            <thead className="bg-[#3986d7] text-white">
+              <tr className="text-sm">
+                <th>#</th>
+                <th>Camp Name</th>
+                <th>Camp Fees</th>
+                <th>Participant Name</th>
+                <th>Payment Status</th>
+                <th>Confirmation Status</th>
+                <th>Cancel</th>
+                <th>Feedback</th>
+              </tr>
+            </thead>
+            <tbody>
+              {registeredCamps.map((camp, index) => (
+                <tr key={camp._id} className="text-sm">
+                  <td>{index + 1}</td>
+                  <td>{camp.campName}</td>
+                  <td>${camp.fees}</td>
+                  <td>{camp.participantName}</td>
+                  <td>
+                    {camp?.paymentStatus ? (
+                      <button
+                        disabled
+                        className="btn btn-sm disabled:bg-gray-400 disabled:cursor-not-allowed disabled:text-white"
+                      >
+                        {camp.paymentStatus}
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => handlePay(camp)}
+                        className="btn bg-[#3986d7] hover:bg-[#3075c0] btn-sm px-4 text-white"
+                      >
+                        Pay
+                      </button>
+                    )}
+                  </td>
+                  <td>
+                    {camp?.confirmStatus ? (
+                      "Confirmed"
+                    ) : (
+                      <p className="font-semibold">Pending</p>
+                    )}
+                  </td>
+                  <td>
                     <button
                       onClick={() => {
-                        setIsModalOpen(true);
+                        handleDelete(camp._id);
                       }}
-                      className="btn btn-sm bg-gradient-to-r from-[#389ba8] to-[#2578bc] text-white font-medium rounded-lg px-6 duration-200 ease-in-out"
+                      className="btn btn-error btn-sm text-white"
                     >
-                      Feedback
+                      X
                     </button>
-                  ) : (
-                    <button disabled className="btn btn-sm px-6">
-                      Feedback
-                    </button>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                  </td>
+                  <td>
+                    {camp?.paymentStatus && camp?.confirmStatus ? (
+                      <button
+                        onClick={() => {
+                          setIsModalOpen(true);
+                        }}
+                        className="btn btn-sm bg-gradient-to-r from-[#389ba8] to-[#2578bc] text-white font-medium rounded-lg px-6 duration-200 ease-in-out"
+                      >
+                        Feedback
+                      </button>
+                    ) : (
+                      <button disabled className="btn btn-sm px-6">
+                        Feedback
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
 
-      {/* modal */}
+      {/* Modal */}
       {isModalOpen && <FeedbackModal closeModal={closeModal}></FeedbackModal>}
     </div>
   );

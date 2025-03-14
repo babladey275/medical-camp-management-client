@@ -196,7 +196,7 @@ const AddCamp = () => {
         <div>
           <button
             type="submit"
-            className="btn hover:bg-[#3986d7] bg-[#399ced] text-white w-full"
+            className="btn bg-[#3986d7] hover:bg-[#3075c0] text-white w-full"
           >
             Add Camp
           </button>

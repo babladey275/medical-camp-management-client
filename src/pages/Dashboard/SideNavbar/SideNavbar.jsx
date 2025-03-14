@@ -3,19 +3,25 @@ import {
   FaPlusCircle,
   FaListAlt,
   FaRegistered,
-  FaChartBar,
   FaUserAlt,
+  FaChartBar,
   FaHistory,
   FaUserTie,
 } from "react-icons/fa";
 import useAdmin from "../../../hooks/useAdmin";
 
-const SideNavbar = () => {
+const SideNavbar = ({ isOpen, toggleSidebar }) => {
   const [isAdmin] = useAdmin();
 
   return (
-    <div className="w-64 min-h-screen bg-gray-800 text-white p-4">
+    <div
+      className={`z-20 fixed top-0 left-0 bg-gray-800 text-white w-64 min-h-screen space-y-6 p-4 transition-transform duration-300 ease-in-out md:relative md:translate-x-0 ${
+        isOpen ? "transform translate-x-0" : "transform -translate-x-full"
+      }`}
+      onClick={toggleSidebar}
+    >
       <ul className="space-y-4">
+        {/* Admin Links */}
         {isAdmin ? (
           <>
             <li>
@@ -73,6 +79,7 @@ const SideNavbar = () => {
           </>
         ) : (
           <>
+            {/* Participant Links */}
             <li>
               <NavLink
                 to="/dashboard/profile"

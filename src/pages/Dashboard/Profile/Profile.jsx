@@ -11,7 +11,11 @@ const Profile = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { data: userData = null, refetch } = useQuery({
+  const {
+    data: userData = null,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["user", user?.email],
     queryFn: async () => {
       if (user?.email) {
@@ -30,42 +34,57 @@ const Profile = () => {
     refetch();
   };
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <span className="loading loading-ring loading-lg"></span>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-2xl mx-auto p-8 bg-white rounded-xl shadow-lg">
-      <div className="text-center mb-6">
-        <h1 className="text-3xl font-semibold text-gray-800">Your Profile</h1>
-      </div>
-
       <div className="flex flex-col items-center space-y-4">
         {/* Profile Picture Section */}
-        <div className="relative">
+        <div className="">
           <img
             src={userData?.image || user?.photoURL || "/default-avatar.png"}
             alt="User Avatar"
-            className="w-40 h-40 rounded-full border-4 border-indigo-500 shadow-xl mb-4"
+            className="w-40 h-40 rounded-full shadow-xl mb-4 transition-transform duration-300 ease-in-out transform hover:scale-105"
           />
         </div>
 
         {/* User Info Section */}
-        <div className="flex flex-col items-center space-y-2">
-          <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-            <FaUserAlt /> {userData?.name}
-          </h2>
-          <p className="text-gray-600 text-lg flex items-center gap-2">
-            <FaEnvelope /> {userData?.email}
-          </p>
-          <p className="text-gray-600 text-lg flex items-center gap-2">
-            <FaPhoneAlt />
-            {userData?.phone || (
-              <span className="text-red-600">Add Your Phone Number</span>
-            )}
-          </p>
+        <div className="space-y-4 w-full">
+          {/* Name Field */}
+          <div className="flex items-center space-x-3 bg-gray-50 p-4 rounded-lg border border-gray-200 hover:bg-gray-100 cursor-pointer">
+            <FaUserAlt className="text-[#3986d7]" />
+            <p className="text-xl font-semibold text-gray-800">
+              {userData?.name}
+            </p>
+          </div>
+
+          {/* Email Field */}
+          <div className="flex items-center space-x-3 bg-gray-50 p-4 rounded-lg border border-gray-200 hover:bg-gray-100 cursor-pointer">
+            <FaEnvelope className="text-[#3986d7]" />
+            <p className="text-lg text-gray-600">{userData?.email}</p>
+          </div>
+
+          {/* Phone Field */}
+          <div className="flex items-center space-x-3 bg-gray-50 p-4 rounded-lg border border-gray-200 hover:bg-gray-100 cursor-pointer">
+            <FaPhoneAlt className="text-[#3986d7]" />
+            <p className="text-lg text-gray-600">
+              {userData?.phone || (
+                <span className="text-red-600">Add Your Phone Number</span>
+              )}
+            </p>
+          </div>
         </div>
 
         {/* Edit Profile Button */}
         <button
           onClick={handleModalOpen}
-          className="btn hover:bg-[#3986d7] bg-[#399ced] text-white text-xl"
+          className="btn bg-[#3986d7] hover:bg-[#3075c0] text-white text-xl"
         >
           <FaEdit className="mr-2" /> Update Profile
         </button>

@@ -20,7 +20,7 @@ const PaymentHistory = () => {
       </h2>
       <div className="overflow-x-auto rounded-t-lg">
         <table className="table">
-          <thead className="bg-[#399ced] text-white">
+          <thead className="bg-[#3986d7] text-white">
             <tr className="text-sm">
               <th>#</th>
               <th>Camp Name</th>

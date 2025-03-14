@@ -12,16 +12,26 @@ const Navbar = () => {
   const links = (
     <>
       <li>
-        <NavLink to={"/"}>Home</NavLink>
+        <NavLink
+          to={"/"}
+          className="md:text-white px-4 py-2 font-medium rounded-md transition duration-300 ease-in-out hover:bg-white hover:text-blue-600 text-[18px]"
+        >
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink to={"/available-camps"}>Available Camps</NavLink>
+        <NavLink
+          to={"/available-camps"}
+          className="md:text-white font-medium px-4 py-2 rounded-md transition duration-300 ease-in-out hover:bg-white hover:text-blue-600 text-[18px]"
+        >
+          Available Camps
+        </NavLink>
       </li>
     </>
   );
 
   return (
-    <div className="navbar bg-[#399ced] text-white rounded-t-lg">
+    <div className="navbar bg-[#3986d7] text-white rounded-t-lg">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -49,7 +59,7 @@ const Navbar = () => {
         </div>
         <Link to={"/"} className="flex items-center gap-1 cursor-pointer">
           <img src={logo} alt="" className="w-5 md:w-10" />
-          <h2 className="md:text-2xl text-sm">Medical Camp</h2>
+          <h2 className="md:text-2xl text-sm font-semibold">Medical Camp</h2>
         </Link>
       </div>
       <div className="navbar-end">
@@ -87,11 +97,16 @@ const Navbar = () => {
             </ul>
           </div>
         ) : (
-          <Link to={"/login"}>
-            <button className="btn btn-outline btn-sm md:btn-md text-white text-sm">
-              Join Us
-            </button>
-          </Link>
+          <NavLink
+            to={"/login"}
+            className={({ isActive }) =>
+              isActive
+                ? "text-white bg-[#1f5d8f] md:text-[18px] font-semibold px-4 py-1 rounded-full border-2 border-transparent"
+                : "text-[#3986d7] bg-white hover:text-white md:text-[18px] font-medium px-4 py-1 rounded-full border-2 border-transparent hover:bg-[#2e75b7]"
+            }
+          >
+            Join Us
+          </NavLink>
         )}
       </div>
     </div>

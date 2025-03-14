@@ -61,12 +61,12 @@ const ManageRegisteredCamps = () => {
 
   return (
     <div>
-      <h2 className="text-3xl font-semibold text-center mb-8">
+      <h2 className="md:text-3xl text-xl font-semibold text-center mb-8">
         Manage All Registered Camps
       </h2>
       <div className="overflow-x-auto rounded-t-lg">
         <table className="table">
-          <thead className="bg-[#399ced] text-white">
+          <thead className="bg-[#3986d7] text-white">
             <tr className="text-sm">
               <th>#</th>
               <th>Participant Name</th>
