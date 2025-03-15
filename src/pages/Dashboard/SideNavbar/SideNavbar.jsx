@@ -9,9 +9,12 @@ import {
   FaUserTie,
 } from "react-icons/fa";
 import useAdmin from "../../../hooks/useAdmin";
+import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 
 const SideNavbar = ({ isOpen, toggleSidebar }) => {
-  const [isAdmin] = useAdmin();
+  const [isAdmin, isAdminLoading] = useAdmin();
+
+  if (isAdminLoading) return <LoadingSpinner />;
 
   return (
     <div

@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { useState } from "react";
+import axios from "axios";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -13,16 +14,16 @@ const AddCamp = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const axiosPublic = useAxiosPublic();
+
   const axiosSecure = useAxiosSecure();
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data) => {
-    const imageFile = { image: data.image[0] };
-    const res = await axiosPublic.post(image_hosting_api, imageFile, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    setLoading(true);
+    const formData = new FormData();
+    formData.append("image", data.image[0]);
+
+    const res = await axios.post(image_hosting_api, formData);
 
     if (res.data.success) {
       const camp = {
@@ -37,12 +38,14 @@ const AddCamp = () => {
       };
       const campRes = await axiosSecure.post("/camps", camp);
 
+      setLoading(false);
+
       if (campRes.data.insertedId) {
         reset();
         Swal.fire({
           position: "top",
           icon: "success",
-          title: `${data.campName} is added to the camp.`,
+          title: `${data.campName} has been added successfully!`,
           showConfirmButton: false,
           timer: 2000,
         });
@@ -195,10 +198,11 @@ const AddCamp = () => {
         {/* Submit Button */}
         <div>
           <button
+            disabled={loading}
             type="submit"
             className="btn bg-[#3986d7] hover:bg-[#3075c0] text-white w-full"
           >
-            Add Camp
+            {loading ? "Adding Camp..." : "Add Camp"}
           </button>
         </div>
       </form>

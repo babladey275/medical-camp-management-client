@@ -4,6 +4,7 @@ import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaEdit, FaEnvelope, FaPhoneAlt, FaUserAlt } from "react-icons/fa"; // Edit icon for button
 import UpdateProfileModal from "./UpdateProfileModal";
+import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 
 const Profile = () => {
   const axiosSecure = useAxiosSecure();
@@ -34,13 +35,7 @@ const Profile = () => {
     refetch();
   };
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex justify-center items-center">
-        <span className="loading loading-ring loading-lg"></span>
-      </div>
-    );
-  }
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <div className="max-w-2xl mx-auto p-8 bg-white rounded-xl shadow-lg">

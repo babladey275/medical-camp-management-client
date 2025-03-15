@@ -36,7 +36,7 @@ const Dashboard = () => {
         </button>
       </div>
 
-      <div className="flex">
+      <div className="md:flex">
         {/* Side Navbar for mobile and desktop */}
         <SideNavbar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 

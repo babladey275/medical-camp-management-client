@@ -1,13 +1,36 @@
 import { useForm } from "react-hook-form";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
+import axios from "axios";
+import { useState } from "react";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const UpdateCamp = () => {
+  const { id } = useParams();
+  const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const [loading, setLoading] = useState(false);
+
+  const { data: camps, isLoading } = useQuery({
+    queryKey: ["camps", id],
+    queryFn: async () => {
+      const { data } = await axiosSecure(`/camps/${id}`);
+      return data;
+    },
+  });
+
+  if (isLoading) return <LoadingSpinner />;
+
   const {
     _id,
     name,
@@ -17,20 +40,12 @@ const UpdateCamp = () => {
     healthCareProfessional,
     participantCount,
     description,
-  } = useLoaderData();
-  const navigate = useNavigate();
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const axiosPublic = useAxiosPublic();
-  const axiosSecure = useAxiosSecure();
+  } = camps;
 
   const onSubmit = async (data) => {
+    setLoading(true);
     const imageFile = { image: data.image[0] };
-    const res = await axiosPublic.post(image_hosting_api, imageFile, {
+    const res = await axios.post(image_hosting_api, imageFile, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -48,6 +63,7 @@ const UpdateCamp = () => {
         description: data.description,
       };
       const campRes = await axiosSecure.patch(`/camps/${_id}`, camp);
+      setLoading(false);
 
       if (campRes.data.modifiedCount > 0) {
         Swal.fire({
@@ -216,7 +232,7 @@ const UpdateCamp = () => {
             type="submit"
             className="btn hover:bg-[#3986d7] bg-[#399ced] text-white w-full"
           >
-            Update Camp
+            {loading ? "Updating....." : "Update Camp"}
           </button>
         </div>
       </form>

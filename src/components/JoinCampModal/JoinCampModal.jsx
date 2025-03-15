@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const JoinCampModal = ({
   closeModal,
@@ -14,6 +15,7 @@ const JoinCampModal = ({
 }) => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -45,6 +47,7 @@ const JoinCampModal = ({
         icon: "success",
         confirmButtonText: "OK",
       });
+      navigate("/dashboard/registered-camps");
       closeModal();
     }
   };

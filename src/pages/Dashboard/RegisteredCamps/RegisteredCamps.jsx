@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import FeedbackModal from "../../../components/FeedbackModal/FeedbackModal";
+import LoadingSpinner from "../../../components/LoadingSpinner/LoadingSpinner";
 
 const RegisteredCamps = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,13 +27,7 @@ const RegisteredCamps = () => {
     },
   });
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex justify-center items-center">
-        <span className="loading loading-ring loading-lg"></span>
-      </div>
-    );
-  }
+  if (isLoading) return <LoadingSpinner />;
 
   const handleDelete = (id) => {
     Swal.fire({

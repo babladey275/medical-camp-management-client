@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FaCalendarAlt,
   FaMapMarkedAlt,
@@ -7,12 +7,38 @@ import {
   FaUserMd,
   FaUsers,
 } from "react-icons/fa";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import JoinCampModal from "../../components/JoinCampModal/JoinCampModal";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 const CampDetails = () => {
+  const { campId } = useParams();
+  const axiosPublic = useAxiosPublic();
+  const { user } = useAuth();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [count, setCount] = useState(0);
+  const navigate = useNavigate();
+
+  const { data: camps, isLoading } = useQuery({
+    queryKey: ["camps", campId],
+    queryFn: async () => {
+      const { data } = await axiosPublic(`/camps/${campId}`);
+      return data;
+    },
+  });
+
+  useEffect(() => {
+    if (camps && camps.participantCount !== undefined) {
+      setCount(camps.participantCount);
+    }
+  }, [camps]);
+
+  if (isLoading) return <LoadingSpinner />;
+
   const {
     _id,
     name,
@@ -21,14 +47,8 @@ const CampDetails = () => {
     dateTime,
     location,
     healthCareProfessional,
-    participantCount,
     description,
-  } = useLoaderData();
-
-  const { user } = useAuth();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const navigate = useNavigate();
-  const [count, setCount] = useState(participantCount);
+  } = camps || {};
 
   const handleJoinCamp = () => {
     if (!user) {
@@ -55,7 +75,7 @@ const CampDetails = () => {
   };
 
   const updateParticipantCount = () => {
-    setCount(count + 1);
+    setCount((prevCount) => prevCount + 1);
   };
 
   return (

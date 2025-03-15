@@ -35,10 +35,6 @@ export const router = createBrowserRouter([
       {
         path: "camp-details/:campId",
         element: <CampDetails />,
-        loader: ({ params }) =>
-          fetch(
-            `https://medical-camp-management-server-xi.vercel.app/camps/${params.campId}`
-          ),
       },
       {
         path: "login",
@@ -85,10 +81,6 @@ export const router = createBrowserRouter([
             <UpdateCamp />
           </AdminRoute>
         ),
-        loader: ({ params }) =>
-          fetch(
-            `https://medical-camp-management-server-xi.vercel.app/camps/${params.id}`
-          ),
       },
       {
         path: "manage-registered-camps",

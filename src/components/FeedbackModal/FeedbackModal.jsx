@@ -14,7 +14,7 @@ const FeedbackModal = ({ closeModal }) => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
 
     const feedback = {
       name: user?.displayName,
@@ -22,7 +22,7 @@ const FeedbackModal = ({ closeModal }) => {
       rating: data.rating,
     };
     const res = await axiosSecure.post("/reviews", feedback);
-    console.log(res.data);
+    // console.log(res.data);
     if (res.data.insertedId) {
       Swal.fire({
         title: "Success!",
