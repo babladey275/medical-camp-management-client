@@ -1,6 +1,6 @@
 # Medical Camp
 
-Medical Camp is a comprehensive platform designed for managing and organizing various medical camps. It allows administrators to easily add, update, and manage camp details, while users can view, register for camps, and track their payment history. The platform is built with modern technologies including React, React Query, Axios, and Stripe for secure payment processing.
+Medical Camp is a modern web-based platform for organizing and participating in medical camps. It supports user registration, secure payments via Stripe, real-time status tracking, and feedback collection. Organizers can manage camp listings, confirm or reject registrations, and maintain participant records. Built using React, React Query, Axios, and Stripe for a secure and responsive experience.
 
 ---
 
@@ -88,3 +88,5 @@ Medical Camp is a comprehensive platform designed for managing and organizing va
 **Password**: Admin123@
 
 **live link**: https://medical-camp-bb0ac.web.app/
+
+**Server Code**: https://github.com/babladey275/medical-camp-management-server
